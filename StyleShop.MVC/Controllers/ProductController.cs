@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using StyleShop.Application.Product;
 using StyleShop.Application.Services;
 
@@ -18,8 +19,10 @@ namespace StyleShop.MVC.Controllers
             return View();
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var categories = await _productService.GetProductCategories();
+            ViewBag.Categories = categories.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
             return View();
         }
 

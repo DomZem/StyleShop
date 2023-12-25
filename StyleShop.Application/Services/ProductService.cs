@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StyleShop.Application.Product;
+using StyleShop.Domain.Entities;
 using StyleShop.Domain.Interfaces;
 
 namespace StyleShop.Application.Services
@@ -20,6 +21,11 @@ namespace StyleShop.Application.Services
         {
             var product = _mapper.Map<Domain.Entities.Product>(productDto);
             await _productRepository.Create(product);
+        }
+
+        public async Task<IEnumerable<ProductCategory>> GetProductCategories()
+        {
+            return await _productRepository.GetProductCategories();
         }
     }
 }

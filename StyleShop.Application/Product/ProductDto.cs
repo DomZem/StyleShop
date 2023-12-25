@@ -1,5 +1,6 @@
 ﻿namespace StyleShop.Application.Product
 {
+
     public class ProductDto
     {
         public string Name { get; set; } = default!;

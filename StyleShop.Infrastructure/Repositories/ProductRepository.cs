@@ -1,4 +1,5 @@
-﻿using StyleShop.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using StyleShop.Domain.Entities;
 using StyleShop.Domain.Interfaces;
 using StyleShop.Infrastructure.Persistence;
 
@@ -17,6 +18,11 @@ namespace StyleShop.Infrastructure.Repositories
         {
             _dbContext.Add(product);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ProductCategory>> GetProductCategories()
+        {
+            return await _dbContext.ProductCategories.ToListAsync();
         }
     }
 }
