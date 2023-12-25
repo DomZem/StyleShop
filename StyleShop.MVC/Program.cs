@@ -1,4 +1,5 @@
 using StyleShop.Infrastructure.Extensions;
+using StyleShop.Application.Extensions;
 
 namespace StyleShop.MVC
 {
@@ -11,6 +12,7 @@ namespace StyleShop.MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication();
 
             var app = builder.Build();
                 
