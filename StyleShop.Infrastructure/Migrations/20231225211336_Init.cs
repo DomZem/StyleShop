@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace StyleShop.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -91,6 +93,47 @@ namespace StyleShop.Infrastructure.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "OrderStatuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Pending" },
+                    { 2, "Processing" },
+                    { 3, "Shipped" },
+                    { 4, "Delivered" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductCategories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Electronics" },
+                    { 2, "Fashion" },
+                    { 3, "Entertainment" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CreatedAt", "Description", "Name", "Price", "ProductCategoryId", "Quantity" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8039), "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series. It features a sleek design with a Ceramic Shield front cover, a Textured Matte Glass back, and an aerospace-grade aluminum frame.", "Iphone 13", 3100m, 1, 100 },
+                    { 2, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8042), "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.", "Nike sports sweatshirt", 119.99m, 2, 100 },
+                    { 3, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8045), "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.", "Game of Thrones - A Clash of Kingdoms", 49.99m, 3, 100 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "OrderStatusId", "OrderedAt", "ProductId", "ProductQuantity", "OrderAddress_City", "OrderAddress_Country", "OrderAddress_PostalCode", "OrderAddress_Street" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8078), 1, 1, "Another City", "UK", "54321", "789 Pine Lane" },
+                    { 2, 2, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8079), 2, 2, "Anytown", "USA", "12345", "123 Main Street" },
+                    { 3, 4, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8080), 3, 3, "Sometown", "Canada", "67890", "456 Oak Avenue" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,9 +12,8 @@ namespace StyleShop.MVC
             builder.Services.AddControllersWithViews();
             builder.Services.AddInfrastructure(builder.Configuration);
 
-            //builder.Services.AddDbContext<StyleShopDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StyleShop")));
             var app = builder.Build();
-
+                
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

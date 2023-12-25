@@ -12,7 +12,7 @@ using StyleShop.Infrastructure.Persistence;
 namespace StyleShop.Infrastructure.Migrations
 {
     [DbContext(typeof(StyleShopDbContext))]
-    [Migration("20231225200341_Init")]
+    [Migration("20231225211336_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -52,6 +52,32 @@ namespace StyleShop.Infrastructure.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OrderStatusId = 1,
+                            OrderedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8078),
+                            ProductId = 1,
+                            ProductQuantity = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            OrderStatusId = 2,
+                            OrderedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8079),
+                            ProductId = 2,
+                            ProductQuantity = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            OrderStatusId = 4,
+                            OrderedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8080),
+                            ProductId = 3,
+                            ProductQuantity = 3
+                        });
                 });
 
             modelBuilder.Entity("StyleShop.Domain.Entities.OrderStatus", b =>
@@ -72,6 +98,28 @@ namespace StyleShop.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("OrderStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Pending"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Processing"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Shipped"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Delivered"
+                        });
                 });
 
             modelBuilder.Entity("StyleShop.Domain.Entities.Product", b =>
@@ -109,6 +157,38 @@ namespace StyleShop.Infrastructure.Migrations
                     b.HasIndex("ProductCategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8039),
+                            Description = "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series. It features a sleek design with a Ceramic Shield front cover, a Textured Matte Glass back, and an aerospace-grade aluminum frame.",
+                            Name = "Iphone 13",
+                            Price = 3100m,
+                            ProductCategoryId = 1,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8042),
+                            Description = "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.",
+                            Name = "Nike sports sweatshirt",
+                            Price = 119.99m,
+                            ProductCategoryId = 2,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8045),
+                            Description = "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.",
+                            Name = "Game of Thrones - A Clash of Kingdoms",
+                            Price = 49.99m,
+                            ProductCategoryId = 3,
+                            Quantity = 100
+                        });
                 });
 
             modelBuilder.Entity("StyleShop.Domain.Entities.ProductCategory", b =>
@@ -126,6 +206,23 @@ namespace StyleShop.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Electronics"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Fashion"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Entertainment"
+                        });
                 });
 
             modelBuilder.Entity("StyleShop.Domain.Entities.Order", b =>
@@ -169,6 +266,32 @@ namespace StyleShop.Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    OrderId = 1,
+                                    City = "Another City",
+                                    Country = "UK",
+                                    PostalCode = "54321",
+                                    Street = "789 Pine Lane"
+                                },
+                                new
+                                {
+                                    OrderId = 2,
+                                    City = "Anytown",
+                                    Country = "USA",
+                                    PostalCode = "12345",
+                                    Street = "123 Main Street"
+                                },
+                                new
+                                {
+                                    OrderId = 3,
+                                    City = "Sometown",
+                                    Country = "Canada",
+                                    PostalCode = "67890",
+                                    Street = "456 Oak Avenue"
+                                });
                         });
 
                     b.Navigation("OrderAddress")
