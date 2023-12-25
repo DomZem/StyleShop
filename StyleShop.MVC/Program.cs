@@ -1,3 +1,5 @@
+using StyleShop.Infrastructure.Extensions;
+
 namespace StyleShop.MVC
 {
     public class Program
@@ -8,7 +10,9 @@ namespace StyleShop.MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddInfrastructure(builder.Configuration);
 
+            //builder.Services.AddDbContext<StyleShopDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StyleShop")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
