@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StyleShop.Domain.Entities;
 
@@ -43,6 +44,29 @@ namespace StyleShop.Infrastructure.Persistence
 
             #region === Seed ===
 
+            string TESTER_USER_ID = Guid.NewGuid().ToString();
+
+            var testerUser = new IdentityUser
+            {
+                Id = TESTER_USER_ID,
+                Email = "tester@gmail.com",
+                EmailConfirmed = true,
+                UserName = "tester",
+                NormalizedUserName = "TESTER"
+            };
+
+            // hash password
+            PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
+            testerUser.PasswordHash = ph.HashPassword(testerUser, "zaq1@WSX");
+
+            testerUser.NormalizedUserName = testerUser.Email.ToUpper();
+            testerUser.NormalizedEmail = testerUser.Email.ToUpper();
+            testerUser.LockoutEnabled = true;
+            testerUser.LockoutEnd = null;
+
+            // save user
+            modelBuilder.Entity<IdentityUser>().HasData(testerUser);
+
             modelBuilder.Entity<ProductCategory>()
                 .HasData
                 (
@@ -71,9 +95,9 @@ namespace StyleShop.Infrastructure.Persistence
             modelBuilder.Entity<Order>()
                 .HasData
                 (
-                    new Order() { Id = 1, ProductQuantity = 1, OrderStatusId = 1, ProductId = 1 },
-                    new Order() { Id = 2, ProductQuantity = 2, OrderStatusId = 2, ProductId = 2 },
-                    new Order() { Id = 3, ProductQuantity = 3, OrderStatusId = 4, ProductId = 3 }
+                    new Order() { Id = 1, ProductQuantity = 1, OrderStatusId = 1, ProductId = 1, UserId = TESTER_USER_ID },
+                    new Order() { Id = 2, ProductQuantity = 2, OrderStatusId = 2, ProductId = 2, UserId = TESTER_USER_ID },
+                    new Order() { Id = 3, ProductQuantity = 3, OrderStatusId = 4, ProductId = 3, UserId = TESTER_USER_ID }
                 );
 
             modelBuilder.Entity<Order>()

@@ -1,4 +1,6 @@
-﻿namespace StyleShop.Domain.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace StyleShop.Domain.Entities
 {
     public class Order
     {
@@ -17,5 +19,10 @@
         public int OrderStatusId { get; set; }
 
         public OrderStatus OrderStatus { get; set; } = default!;
+
+        public string UserId { get; set; } = default!;
+
+        public IdentityUser? User { get; set; }
+
     }
 }

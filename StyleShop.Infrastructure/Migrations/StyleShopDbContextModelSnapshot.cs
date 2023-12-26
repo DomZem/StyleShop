@@ -137,6 +137,24 @@ namespace StyleShop.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "7a795d0a-2a88-4d05-bcfa-8850982323fb",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2b338d68-eb74-4dbb-8103-92fa28294fd8",
+                            Email = "tester@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "TESTER@GMAIL.COM",
+                            NormalizedUserName = "TESTER@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAENU2nAwqu2eHovrijFrJtKRDNOABwvm427OqWrEglvBKFk7yDi1M2WwH+FJ3j2V2Eg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f48b4ce1-68b7-4835-a97b-652249aea81c",
+                            TwoFactorEnabled = false,
+                            UserName = "tester"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -167,10 +185,12 @@ namespace StyleShop.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -207,10 +227,12 @@ namespace StyleShop.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -240,11 +262,17 @@ namespace StyleShop.Infrastructure.Migrations
                     b.Property<int>("ProductQuantity")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderStatusId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
 
@@ -253,25 +281,28 @@ namespace StyleShop.Infrastructure.Migrations
                         {
                             Id = 1,
                             OrderStatusId = 1,
-                            OrderedAt = new DateTime(2023, 12, 26, 19, 49, 35, 177, DateTimeKind.Utc).AddTicks(8590),
+                            OrderedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1578),
                             ProductId = 1,
-                            ProductQuantity = 1
+                            ProductQuantity = 1,
+                            UserId = "7a795d0a-2a88-4d05-bcfa-8850982323fb"
                         },
                         new
                         {
                             Id = 2,
                             OrderStatusId = 2,
-                            OrderedAt = new DateTime(2023, 12, 26, 19, 49, 35, 177, DateTimeKind.Utc).AddTicks(8592),
+                            OrderedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1580),
                             ProductId = 2,
-                            ProductQuantity = 2
+                            ProductQuantity = 2,
+                            UserId = "7a795d0a-2a88-4d05-bcfa-8850982323fb"
                         },
                         new
                         {
                             Id = 3,
                             OrderStatusId = 4,
-                            OrderedAt = new DateTime(2023, 12, 26, 19, 49, 35, 177, DateTimeKind.Utc).AddTicks(8593),
+                            OrderedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1581),
                             ProductId = 3,
-                            ProductQuantity = 3
+                            ProductQuantity = 3,
+                            UserId = "7a795d0a-2a88-4d05-bcfa-8850982323fb"
                         });
                 });
 
@@ -354,7 +385,7 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 12, 26, 19, 49, 35, 177, DateTimeKind.Utc).AddTicks(8553),
+                            CreatedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1523),
                             Description = "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series.",
                             Name = "Iphone 13",
                             Price = 3100m,
@@ -364,7 +395,7 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 12, 26, 19, 49, 35, 177, DateTimeKind.Utc).AddTicks(8556),
+                            CreatedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1527),
                             Description = "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.",
                             Name = "Nike sports sweatshirt",
                             Price = 119.99m,
@@ -374,7 +405,7 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 12, 26, 19, 49, 35, 177, DateTimeKind.Utc).AddTicks(8557),
+                            CreatedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1529),
                             Description = "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.",
                             Name = "Game of Thrones - A Clash of Kingdoms",
                             Price = 49.99m,
@@ -485,6 +516,12 @@ namespace StyleShop.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("StyleShop.Domain.Entities.OrderAddress", "OrderAddress", b1 =>
                         {
                             b1.Property<int>("OrderId")
@@ -546,6 +583,8 @@ namespace StyleShop.Infrastructure.Migrations
                     b.Navigation("OrderStatus");
 
                     b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StyleShop.Domain.Entities.Product", b =>
