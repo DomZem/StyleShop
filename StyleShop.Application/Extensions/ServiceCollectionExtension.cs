@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 using StyleShop.Application.Mappings;
+using StyleShop.Application.Product;
 using StyleShop.Application.Services;
 
 namespace StyleShop.Application.Extensions
@@ -11,6 +14,10 @@ namespace StyleShop.Application.Extensions
             services.AddScoped<IProductService, ProductService>();
 
             services.AddAutoMapper(typeof(StyleShopMappingProfile));
+
+            services.AddValidatorsFromAssemblyContaining<ProductDtoValidator>()
+                    .AddFluentValidationAutoValidation()
+                    .AddFluentValidationClientsideAdapters();
         }
     }
 }

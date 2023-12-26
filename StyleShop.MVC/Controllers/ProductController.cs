@@ -29,6 +29,11 @@ namespace StyleShop.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductDto product)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
             await _productService.Create(product);
             return RedirectToAction("Index", "Home");
         }
