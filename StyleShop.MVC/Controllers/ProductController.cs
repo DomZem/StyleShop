@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using StyleShop.Application.Product;
 using StyleShop.Application.Product.Commands.CreateProduct;
 using StyleShop.Application.Product.Commands.DeleteProduct;
 using StyleShop.Application.Product.Commands.EditProduct;

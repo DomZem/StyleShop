@@ -14,9 +14,20 @@ namespace StyleShop.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task Create(Order order)
+        {
+            _dbContext.Orders.Add(order);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Order>> GetAll()
         {
             return await _dbContext.Orders.ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<OrderStatus>> GetOrderStatuses()
+        {
+            return await _dbContext.OrderStatuses.ToListAsync();
         }
     }
 }

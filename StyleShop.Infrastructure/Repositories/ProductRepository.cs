@@ -16,7 +16,7 @@ namespace StyleShop.Infrastructure.Repositories
 
         public async Task Create(Product product)
         {
-            _dbContext.Add(product);
+            _dbContext.Products.Add(product);
             await _dbContext.SaveChangesAsync();
         }
 
