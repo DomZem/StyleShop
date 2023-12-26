@@ -25,6 +25,11 @@ namespace StyleShop.Infrastructure.Repositories
             return await _dbContext.Products.ToArrayAsync();
         }
 
+        public async Task<Product> GetById(int id)
+        {
+            return await _dbContext.Products.FirstAsync(p => p.Id == id);
+        }
+
         public async Task<IEnumerable<ProductCategory>> GetProductCategories()
         {
             return await _dbContext.ProductCategories.ToListAsync();

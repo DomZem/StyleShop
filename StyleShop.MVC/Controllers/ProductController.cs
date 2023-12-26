@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using StyleShop.Application.Product.Commands.CreateProduct;
 using StyleShop.Application.Product.Queries.GetAllProductCategories;
 using StyleShop.Application.Product.Queries.GetAllProducts;
+using StyleShop.Application.Product.Queries.GetProductDetailsById;
 
 namespace StyleShop.MVC.Controllers
 {
@@ -27,6 +28,12 @@ namespace StyleShop.MVC.Controllers
             var categories = await _mediator.Send(new GetAllProductCategoriesQuery());
             ViewBag.Categories = categories.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
             return View();
+        }
+
+        public async  Task<IActionResult> Details(int id) 
+        {
+            var dto = await _mediator.Send(new GetProductDetailsByIdQuery(id));
+            return View(dto);
         }
 
         [HttpPost]

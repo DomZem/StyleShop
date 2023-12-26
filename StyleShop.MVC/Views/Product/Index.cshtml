@@ -47,9 +47,9 @@
                 @Html.DisplayFor(modelItem => item.ProductCategoryId)
             </td>
             <td>
-                <a class="btn btn-secondary" asp-action="Edit">Edit</a>
-                <a class="btn btn-dark" asp-action="Details">Details</a>
-                <a class="btn btn-danger" asp-action="Delete">Delete</a>
+                <a class="btn btn-secondary" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-dark" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

@@ -8,6 +8,8 @@ namespace StyleShop.Domain.Interfaces
 
         Task<IEnumerable<Product>> GetAll();
 
+        Task<Product> GetById(int id);  
+
         Task<IEnumerable<ProductCategory>> GetProductCategories();
 
     }
