@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace StyleShop.Application.Product
+namespace StyleShop.Application.Product.Commands.CreateProduct
 {
-    public class ProductDtoValidator : AbstractValidator<ProductDto>
+    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
     {
-        public ProductDtoValidator()
+        public CreateProductCommandValidator()
         {
             RuleFor(p => p.Name)
                 .NotEmpty()

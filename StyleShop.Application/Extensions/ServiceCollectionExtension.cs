@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using StyleShop.Application.Mappings;
-using StyleShop.Application.Product;
-using StyleShop.Application.Services;
+using StyleShop.Application.Product.Commands.CreateProduct;
 
 namespace StyleShop.Application.Extensions
 {
@@ -11,11 +11,11 @@ namespace StyleShop.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IProductService, ProductService>();
+            services.AddMediatR(typeof(CreateProductCommand));
 
             services.AddAutoMapper(typeof(StyleShopMappingProfile));
 
-            services.AddValidatorsFromAssemblyContaining<ProductDtoValidator>()
+            services.AddValidatorsFromAssemblyContaining<CreateProductCommandValidator>()
                     .AddFluentValidationAutoValidation()
                     .AddFluentValidationClientsideAdapters();
         }

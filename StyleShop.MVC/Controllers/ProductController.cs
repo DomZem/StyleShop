@@ -1,42 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using StyleShop.Application.Product;
-using StyleShop.Application.Services;
+using StyleShop.Application.Product.Commands.CreateProduct;
+using StyleShop.Application.Product.Queries.GetAllProductCategories;
+using StyleShop.Application.Product.Queries.GetAllProducts;
 
 namespace StyleShop.MVC.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductService _productService;
+        private readonly IMediator _mediator;
 
-        public ProductController(IProductService productService)
+        public ProductController(IMediator mediator)
         {
-            _productService = productService;
+            _mediator = mediator;
         }
 
         public async Task<IActionResult> Index()
         {
-            var products = await _productService.GetAll();
+            var products = await _mediator.Send(new GetAllProductsQuery());
             return View(products);
         }
 
         public async Task<IActionResult> Create()
         {
-            var categories = await _productService.GetProductCategories();
+            var categories = await _mediator.Send(new GetAllProductCategoriesQuery());
             ViewBag.Categories = categories.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductDto product)
+        public async Task<IActionResult> Create(CreateProductCommand command)
         {
             if(!ModelState.IsValid)
             {
-                return View(product);
+                return View(command);
             }
 
-            await _productService.Create(product);
-            return RedirectToAction("Index", "Home");
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
