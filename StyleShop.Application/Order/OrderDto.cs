@@ -17,5 +17,7 @@
         public int ProductId { get; set; }
 
         public int OrderStatusId { get; set; }
+
+        public bool IsVisible { get; set; }
     }
 }

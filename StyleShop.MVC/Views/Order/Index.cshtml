@@ -1,16 +1,28 @@
-﻿@model IEnumerable<StyleShop.Application.Order.OrderDto>
+﻿@using StyleShop.Application.Order;
+
+@model IEnumerable<OrderDto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Orders";
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>List of orders</h3>
 
-
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </div>
 
+@if(!Model.Any())
+{
+    <section style="min-height: 100%" class="w-100 d-flex justify-content-center align-items-center">
+        <div class="text-center">
+            <h4>Empty list of orders</h4>
+            <p>Get started by click <span class="fw-medium">Create New</span> button</p>
+        </div>
+    </section>
+} 
+else
+{
 <table class="table">
     <thead>
         <tr>
@@ -33,29 +45,35 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStatusId)
-            </td>
-            <td>
-                <a class="btn btn-secondary" asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-dark" asp-controller="Order" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a class="btn btn-danger" asp-controller="Order" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-           </td>
-        </tr>
-}
+    @foreach (var item in Model) 
+    {
+        @if(item.IsVisible)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderStatusId)
+                </td>
+                <td>
+                    <a class="btn btn-secondary" asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-dark" asp-controller="Order" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger" asp-controller="Order" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    }
     </tbody>
 </table>
+}
+

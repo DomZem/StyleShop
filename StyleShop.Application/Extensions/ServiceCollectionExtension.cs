@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,13 @@ namespace StyleShop.Application.Extensions
             services.AddScoped<IUserContext, UserContext>();
 
             services.AddMediatR(typeof(CreateProductCommand));
+
+            services.AddScoped(provider => new MapperConfiguration(cfg => 
+            {
+                var scope = provider.CreateScope();
+                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                cfg.AddProfile(new StyleShopMappingProfile(userContext));
+            }).CreateMapper());
 
             services.AddAutoMapper(typeof(StyleShopMappingProfile));
 
