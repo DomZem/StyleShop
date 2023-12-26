@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StyleShop.Domain.Entities;
 
 namespace StyleShop.Infrastructure.Persistence
 {
-    public class StyleShopDbContext : DbContext
+    public class StyleShopDbContext : IdentityDbContext
     {
         public DbSet<ProductCategory> ProductCategories { get; set; }
 

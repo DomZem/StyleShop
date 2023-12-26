@@ -50,6 +50,7 @@ namespace StyleShop.MVC
                 SupportedUICultures = cultures
             });
 
+            app.MapRazorPages();
 
             app.Run();
         }
