@@ -10,7 +10,10 @@ namespace StyleShop.Domain.Interfaces
 
         Task<Order> GetById(int id);
 
+        void Delete(Order order);
 
         Task<IEnumerable<OrderStatus>> GetOrderStatuses();
+
+        Task Commit();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StyleShop.Application.Order;
+using StyleShop.Application.Order.Commands.DeleteOrder;
 using StyleShop.Application.Product;
 using StyleShop.Application.Product.Commands.DeleteProduct;
 using StyleShop.Application.Product.Commands.EditProduct;
@@ -25,6 +26,8 @@ namespace StyleShop.Application.Mappings
                 .ForMember(dto => dto.City, opt => opt.MapFrom(src => src.OrderAddress.City))
                 .ForMember(dto => dto.PostalCode, opt => opt.MapFrom(src => src.OrderAddress.PostalCode))
                 .ForMember(dto => dto.Country, opt => opt.MapFrom(src => src.OrderAddress.Country));
+
+            CreateMap<OrderDto, DeleteOrderCommand>();
 
             CreateMap<ProductDto, Domain.Entities.Product>().ReverseMap();
 

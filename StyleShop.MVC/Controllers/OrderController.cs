@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StyleShop.Application.Order.Commands.CreateOrder;
+using StyleShop.Application.Order.Commands.DeleteOrder;
 using StyleShop.Application.Order.Queries.GetAllOrders;
 using StyleShop.Application.Order.Queries.GetOrderDetailsById;
 using StyleShop.Application.Product.Queries.GetAllProducts;
@@ -24,7 +25,7 @@ namespace StyleShop.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var orders = await _mediator.Send(new GetAllOrdersQuery());
-            return View(orders);    
+            return View(orders);
         }
 
         public async Task<IActionResult> Create()
@@ -37,7 +38,7 @@ namespace StyleShop.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateOrderCommand command)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(command);
             }
@@ -50,6 +51,20 @@ namespace StyleShop.MVC.Controllers
         {
             var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
             return View(dto);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
+            DeleteOrderCommand model = _mapper.Map<DeleteOrderCommand>(dto);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteOrderCommand command)
+        {
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index)); 
         }
     }
 }
