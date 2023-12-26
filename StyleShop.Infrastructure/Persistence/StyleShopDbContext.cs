@@ -22,8 +22,8 @@ namespace StyleShop.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Product>()
-                .HasIndex(p => p.Name)
+            modelBuilder.Entity<ProductCategory>()
+                .HasIndex(pc => pc.Name)
                 .IsUnique();
 
             modelBuilder.Entity<OrderStatus>()
@@ -53,7 +53,7 @@ namespace StyleShop.Infrastructure.Persistence
             modelBuilder.Entity<Product>()
                 .HasData
                 (
-                    new Product() { Id = 1, Name = "Iphone 13", Description = "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series. It features a sleek design with a Ceramic Shield front cover, a Textured Matte Glass back, and an aerospace-grade aluminum frame.", Price = 3100, Quantity = 100, ProductCategoryId = 1 },
+                    new Product() { Id = 1, Name = "Iphone 13", Description = "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series.", Price = 3100, Quantity = 100, ProductCategoryId = 1 },
                     new Product() { Id = 2, Name = "Nike sports sweatshirt", Description = "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.", Price = 119.99M, Quantity = 100, ProductCategoryId = 2 },
                     new Product() { Id = 3, Name = "Game of Thrones - A Clash of Kingdoms", Description = "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.", Price = 49.99M, Quantity = 100, ProductCategoryId = 3 }
                 );

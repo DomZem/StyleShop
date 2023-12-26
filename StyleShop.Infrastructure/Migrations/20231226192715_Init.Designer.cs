@@ -12,7 +12,7 @@ using StyleShop.Infrastructure.Persistence;
 namespace StyleShop.Infrastructure.Migrations
 {
     [DbContext(typeof(StyleShopDbContext))]
-    [Migration("20231225211336_Init")]
+    [Migration("20231226192715_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -58,7 +58,7 @@ namespace StyleShop.Infrastructure.Migrations
                         {
                             Id = 1,
                             OrderStatusId = 1,
-                            OrderedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8078),
+                            OrderedAt = new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2230),
                             ProductId = 1,
                             ProductQuantity = 1
                         },
@@ -66,7 +66,7 @@ namespace StyleShop.Infrastructure.Migrations
                         {
                             Id = 2,
                             OrderStatusId = 2,
-                            OrderedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8079),
+                            OrderedAt = new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2231),
                             ProductId = 2,
                             ProductQuantity = 2
                         },
@@ -74,7 +74,7 @@ namespace StyleShop.Infrastructure.Migrations
                         {
                             Id = 3,
                             OrderStatusId = 4,
-                            OrderedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8080),
+                            OrderedAt = new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2232),
                             ProductId = 3,
                             ProductQuantity = 3
                         });
@@ -138,7 +138,7 @@ namespace StyleShop.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -151,9 +151,6 @@ namespace StyleShop.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.HasIndex("ProductCategoryId");
 
                     b.ToTable("Products");
@@ -162,8 +159,8 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8039),
-                            Description = "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series. It features a sleek design with a Ceramic Shield front cover, a Textured Matte Glass back, and an aerospace-grade aluminum frame.",
+                            CreatedAt = new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2191),
+                            Description = "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series.",
                             Name = "Iphone 13",
                             Price = 3100m,
                             ProductCategoryId = 1,
@@ -172,7 +169,7 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8042),
+                            CreatedAt = new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2194),
                             Description = "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.",
                             Name = "Nike sports sweatshirt",
                             Price = 119.99m,
@@ -182,7 +179,7 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8045),
+                            CreatedAt = new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2196),
                             Description = "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.",
                             Name = "Game of Thrones - A Clash of Kingdoms",
                             Price = 49.99m,
@@ -201,9 +198,12 @@ namespace StyleShop.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("ProductCategories");
 

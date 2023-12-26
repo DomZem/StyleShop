@@ -32,7 +32,7 @@ namespace StyleShop.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,7 +45,7 @@ namespace StyleShop.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
@@ -121,9 +121,9 @@ namespace StyleShop.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "Description", "Name", "Price", "ProductCategoryId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8039), "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series. It features a sleek design with a Ceramic Shield front cover, a Textured Matte Glass back, and an aerospace-grade aluminum frame.", "Iphone 13", 3100m, 1, 100 },
-                    { 2, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8042), "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.", "Nike sports sweatshirt", 119.99m, 2, 100 },
-                    { 3, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8045), "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.", "Game of Thrones - A Clash of Kingdoms", 49.99m, 3, 100 }
+                    { 1, new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2191), "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series.", "Iphone 13", 3100m, 1, 100 },
+                    { 2, new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2194), "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.", "Nike sports sweatshirt", 119.99m, 2, 100 },
+                    { 3, new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2196), "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.", "Game of Thrones - A Clash of Kingdoms", 49.99m, 3, 100 }
                 });
 
             migrationBuilder.InsertData(
@@ -131,9 +131,9 @@ namespace StyleShop.Infrastructure.Migrations
                 columns: new[] { "Id", "OrderStatusId", "OrderedAt", "ProductId", "ProductQuantity", "OrderAddress_City", "OrderAddress_Country", "OrderAddress_PostalCode", "OrderAddress_Street" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8078), 1, 1, "Another City", "UK", "54321", "789 Pine Lane" },
-                    { 2, 2, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8079), 2, 2, "Anytown", "USA", "12345", "123 Main Street" },
-                    { 3, 4, new DateTime(2023, 12, 25, 21, 13, 35, 945, DateTimeKind.Utc).AddTicks(8080), 3, 3, "Sometown", "Canada", "67890", "456 Oak Avenue" }
+                    { 1, 1, new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2230), 1, 1, "Another City", "UK", "54321", "789 Pine Lane" },
+                    { 2, 2, new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2231), 2, 2, "Anytown", "USA", "12345", "123 Main Street" },
+                    { 3, 4, new DateTime(2023, 12, 26, 19, 27, 15, 768, DateTimeKind.Utc).AddTicks(2232), 3, 3, "Sometown", "Canada", "67890", "456 Oak Avenue" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -153,8 +153,8 @@ namespace StyleShop.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_Name",
-                table: "Products",
+                name: "IX_ProductCategories_Name",
+                table: "ProductCategories",
                 column: "Name",
                 unique: true);
 
