@@ -8,6 +8,9 @@ namespace StyleShop.Domain.Interfaces
 
         Task<IEnumerable<Order>> GetAll();
 
+        Task<Order> GetById(int id);
+
+
         Task<IEnumerable<OrderStatus>> GetOrderStatuses();
     }
 }

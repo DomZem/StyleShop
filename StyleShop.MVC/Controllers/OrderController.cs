@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StyleShop.Application.Order.Commands.CreateOrder;
 using StyleShop.Application.Order.Queries.GetAllOrders;
-using StyleShop.Application.Order.Queries.GetAllOrderStatuses;
+using StyleShop.Application.Order.Queries.GetOrderDetailsById;
 using StyleShop.Application.Product.Queries.GetAllProducts;
 
 namespace StyleShop.MVC.Controllers
@@ -44,7 +44,12 @@ namespace StyleShop.MVC.Controllers
 
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
+        }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
+            return View(dto);
         }
     }
 }
