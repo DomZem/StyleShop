@@ -34,5 +34,10 @@ namespace StyleShop.Infrastructure.Repositories
         {
             return await _dbContext.ProductCategories.ToListAsync();
         }
+
+        public async Task Commit()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

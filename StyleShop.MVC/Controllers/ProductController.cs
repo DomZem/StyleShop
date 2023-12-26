@@ -1,7 +1,9 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StyleShop.Application.Product.Commands.CreateProduct;
+using StyleShop.Application.Product.Commands.EditProduct;
 using StyleShop.Application.Product.Queries.GetAllProductCategories;
 using StyleShop.Application.Product.Queries.GetAllProducts;
 using StyleShop.Application.Product.Queries.GetProductDetailsById;
@@ -12,9 +14,12 @@ namespace StyleShop.MVC.Controllers
     {
         private readonly IMediator _mediator;
 
-        public ProductController(IMediator mediator)
+        private readonly IMapper _mapper;
+
+        public ProductController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;   
         }
 
         public async Task<IActionResult> Index()
@@ -30,10 +35,33 @@ namespace StyleShop.MVC.Controllers
             return View();
         }
 
-        public async  Task<IActionResult> Details(int id) 
+        public async Task<IActionResult> Details(int id) 
         {
             var dto = await _mediator.Send(new GetProductDetailsByIdQuery(id));
             return View(dto);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var dto = await _mediator.Send(new GetProductDetailsByIdQuery(id));
+            EditProductCommand model = _mapper.Map<EditProductCommand>(dto);
+
+            var categories = await _mediator.Send(new GetAllProductCategoriesQuery());
+            ViewBag.Categories = categories.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditProductCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]

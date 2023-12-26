@@ -12,5 +12,7 @@ namespace StyleShop.Domain.Interfaces
 
         Task<IEnumerable<ProductCategory>> GetProductCategories();
 
+        Task Commit();
+
     }
 }

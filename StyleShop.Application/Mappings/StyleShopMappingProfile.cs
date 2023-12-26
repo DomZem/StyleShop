@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StyleShop.Application.Product;
+using StyleShop.Application.Product.Commands.EditProduct;
 
 namespace StyleShop.Application.Mappings
 {
@@ -7,7 +8,9 @@ namespace StyleShop.Application.Mappings
     {
         public StyleShopMappingProfile()
         {
-            CreateMap<ProductDto, Domain.Entities.Product>().ReverseMap();    
+            CreateMap<ProductDto, Domain.Entities.Product>().ReverseMap();
+
+            CreateMap<ProductDto, EditProductCommand>();
         }
     }
 }
