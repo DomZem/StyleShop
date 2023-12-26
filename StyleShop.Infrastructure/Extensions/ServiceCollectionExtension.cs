@@ -15,6 +15,7 @@ namespace StyleShop.Infrastructure.Extensions
                 configuration.GetConnectionString("StyleShop")));
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();    
         }
     }
 }

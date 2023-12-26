@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using StyleShop.Application.Order;
 using StyleShop.Application.Product;
 using StyleShop.Application.Product.Commands.DeleteProduct;
 using StyleShop.Application.Product.Commands.EditProduct;
+using StyleShop.Domain.Entities;
 
 namespace StyleShop.Application.Mappings
 {
@@ -9,6 +11,21 @@ namespace StyleShop.Application.Mappings
     {
         public StyleShopMappingProfile()
         {
+            CreateMap<OrderDto, Domain.Entities.Order>()
+                .ForMember(e => e.OrderAddress, opt => opt.MapFrom(src => new OrderAddress()
+                {
+                    Street = src.Street,
+                    City = src.City,
+                    PostalCode = src.PostalCode,
+                    Country = src.Country,
+                }));
+
+            CreateMap<Domain.Entities.Order, OrderDto>()
+                .ForMember(dto => dto.Street, opt => opt.MapFrom(src => src.OrderAddress.Street))
+                .ForMember(dto => dto.City, opt => opt.MapFrom(src => src.OrderAddress.City))
+                .ForMember(dto => dto.PostalCode, opt => opt.MapFrom(src => src.OrderAddress.PostalCode))
+                .ForMember(dto => dto.Country, opt => opt.MapFrom(src => src.OrderAddress.Country));
+
             CreateMap<ProductDto, Domain.Entities.Product>().ReverseMap();
 
             CreateMap<ProductDto, EditProductCommand>();
