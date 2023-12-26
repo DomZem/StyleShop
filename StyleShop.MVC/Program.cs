@@ -1,5 +1,7 @@
 using StyleShop.Infrastructure.Extensions;
 using StyleShop.Application.Extensions;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace StyleShop.MVC
 {
@@ -7,6 +9,12 @@ namespace StyleShop.MVC
     {
         public static void Main(string[] args)
         {
+            var cultures = new[]
+           {
+                new CultureInfo("en-US"),
+                new CultureInfo("de"),
+            };
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -34,6 +42,14 @@ namespace StyleShop.MVC
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Product}/{action=Index}/{id?}");
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = cultures,
+                SupportedUICultures = cultures
+            });
+
 
             app.Run();
         }
