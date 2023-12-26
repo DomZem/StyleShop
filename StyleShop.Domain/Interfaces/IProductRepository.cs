@@ -10,6 +10,8 @@ namespace StyleShop.Domain.Interfaces
 
         Task<Product> GetById(int id);  
 
+        void Delete(Product product);
+
         Task<IEnumerable<ProductCategory>> GetProductCategories();
 
         Task Commit();

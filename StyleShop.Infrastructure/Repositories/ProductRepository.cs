@@ -39,5 +39,10 @@ namespace StyleShop.Infrastructure.Repositories
         {
             await _dbContext.SaveChangesAsync();
         }
+
+        public void Delete(Product product)
+        {
+            _dbContext.Products.Remove(product);
+        }
     }
 }

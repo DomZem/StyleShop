@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StyleShop.Application.Product;
+using StyleShop.Application.Product.Commands.DeleteProduct;
 using StyleShop.Application.Product.Commands.EditProduct;
 
 namespace StyleShop.Application.Mappings
@@ -11,6 +12,8 @@ namespace StyleShop.Application.Mappings
             CreateMap<ProductDto, Domain.Entities.Product>().ReverseMap();
 
             CreateMap<ProductDto, EditProductCommand>();
+
+            CreateMap<ProductDto, DeleteProductCommand>();
         }
     }
 }

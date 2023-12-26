@@ -2,7 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StyleShop.Application.Product;
 using StyleShop.Application.Product.Commands.CreateProduct;
+using StyleShop.Application.Product.Commands.DeleteProduct;
 using StyleShop.Application.Product.Commands.EditProduct;
 using StyleShop.Application.Product.Queries.GetAllProductCategories;
 using StyleShop.Application.Product.Queries.GetAllProducts;
@@ -35,6 +37,18 @@ namespace StyleShop.MVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateProductCommand command)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
+        }
+
         public async Task<IActionResult> Details(int id) 
         {
             var dto = await _mediator.Send(new GetProductDetailsByIdQuery(id));
@@ -64,14 +78,16 @@ namespace StyleShop.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateProductCommand command)
+        public async Task<IActionResult> Delete(int id)
         {
-            if(!ModelState.IsValid)
-            {
-                return View(command);
-            }
+            var dto = await _mediator.Send(new GetProductDetailsByIdQuery(id));
+            DeleteProductCommand model = _mapper.Map<DeleteProductCommand>(dto);
+            return View(model);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteProductCommand command)
+        {
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
