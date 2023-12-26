@@ -20,6 +20,11 @@ namespace StyleShop.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<Product>> GetAll()
+        {
+            return await _dbContext.Products.ToArrayAsync();
+        }
+
         public async Task<IEnumerable<ProductCategory>> GetProductCategories()
         {
             return await _dbContext.ProductCategories.ToListAsync();

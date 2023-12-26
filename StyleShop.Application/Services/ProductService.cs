@@ -23,6 +23,14 @@ namespace StyleShop.Application.Services
             await _productRepository.Create(product);
         }
 
+        public async Task<IEnumerable<ProductDto>> GetAll()
+        {
+            var products = await _productRepository.GetAll();
+            var dtos = _mapper.Map<IEnumerable<ProductDto>>(products);
+
+            return dtos;
+        }
+
         public async Task<IEnumerable<ProductCategory>> GetProductCategories()
         {
             return await _productRepository.GetProductCategories();

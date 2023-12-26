@@ -6,6 +6,8 @@ namespace StyleShop.Domain.Interfaces
     {
         Task Create(Product product);
 
+        Task<IEnumerable<Product>> GetAll();
+
         Task<IEnumerable<ProductCategory>> GetProductCategories();
 
     }

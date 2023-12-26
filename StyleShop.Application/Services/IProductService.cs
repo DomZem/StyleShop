@@ -7,6 +7,8 @@ namespace StyleShop.Application.Services
     {
         Task Create(ProductDto product);
 
+        Task<IEnumerable<ProductDto>> GetAll();
+
         Task<IEnumerable<ProductCategory>> GetProductCategories();
     }
 }

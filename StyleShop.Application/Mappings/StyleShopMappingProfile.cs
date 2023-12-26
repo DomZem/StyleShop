@@ -7,7 +7,7 @@ namespace StyleShop.Application.Mappings
     {
         public StyleShopMappingProfile()
         {
-            CreateMap<ProductDto, Domain.Entities.Product>();
+            CreateMap<ProductDto, Domain.Entities.Product>().ReverseMap();    
         }
     }
 }
