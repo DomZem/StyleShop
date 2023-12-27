@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StyleShop.Application.Order.Commands.CreateOrder;
@@ -24,12 +25,14 @@ namespace StyleShop.MVC.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var orders = await _mediator.Send(new GetAllOrdersQuery());
             return View(orders);
         }
 
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             var products = await _mediator.Send(new GetAllProductsQuery());
@@ -38,6 +41,7 @@ namespace StyleShop.MVC.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateOrderCommand command)
         {
             if (!ModelState.IsValid)
@@ -49,12 +53,14 @@ namespace StyleShop.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
             return View(dto);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
@@ -67,6 +73,7 @@ namespace StyleShop.MVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, EditOrderCommand command)
         {
             if (!ModelState.IsValid)
@@ -78,6 +85,7 @@ namespace StyleShop.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
@@ -86,6 +94,7 @@ namespace StyleShop.MVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id, DeleteOrderCommand command)
         {
             await _mediator.Send(command);
