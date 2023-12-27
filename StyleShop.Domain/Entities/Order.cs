@@ -24,5 +24,6 @@ namespace StyleShop.Domain.Entities
 
         public IdentityUser? User { get; set; }
 
+        public decimal TotalPrice { get; set; }
     }
 }

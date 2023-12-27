@@ -32,15 +32,16 @@ namespace StyleShop.Application.Order.Commands.CreateOrder
                 return Unit.Value;
             }
 
+            var orderedProduct = await _productRepository.GetById(request.ProductId);
             var order = _mapper.Map<Domain.Entities.Order>(request);   
+            
             order.OrderStatusId = 1;
             order.UserId = currentUser.Id;
+            order.TotalPrice = request.ProductQuantity * orderedProduct.Price;
 
-            await _orderRepository.Create(order);
-
-            var orderedProduct = await _productRepository.GetById(request.ProductId);
             orderedProduct.Quantity -= request.ProductQuantity;
 
+            await _orderRepository.Create(order);
             await _productRepository.Commit();
 
             return Unit.Value;

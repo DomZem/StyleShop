@@ -12,7 +12,7 @@ using StyleShop.Infrastructure.Persistence;
 namespace StyleShop.Infrastructure.Migrations
 {
     [DbContext(typeof(StyleShopDbContext))]
-    [Migration("20231227095727_Init")]
+    [Migration("20231227171020_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -54,8 +54,8 @@ namespace StyleShop.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9edabd2f-e374-49fa-b434-bfdf10c52522",
-                            ConcurrencyStamp = "9edabd2f-e374-49fa-b434-bfdf10c52522",
+                            Id = "589c0adc-3e4a-440b-acf6-6c7b996295a9",
+                            ConcurrencyStamp = "589c0adc-3e4a-440b-acf6-6c7b996295a9",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -153,33 +153,33 @@ namespace StyleShop.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2ce922c3-c679-4004-8b4b-9e1dc9d81bb0",
+                            Id = "4641d04c-fdc3-4350-85c6-e625396e329b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "60ed0967-a577-4cba-836b-88e2d14cfc28",
+                            ConcurrencyStamp = "0879438e-8bdc-4e41-8e87-54b2e4f07236",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMuqkCHLBioYI9ZPIadE8jw7cc3D4e3amNmPHE5k0WsltgSmKRKcADvERrzx7ZGbog==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOdvePrKE3TN4Z92MIyJEsVEec+VzwCErtY0P/+glufu51qgXxmyP248swIUvKDRHg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "028b4b0b-ea66-40c6-8bbf-0a170ec57a70",
+                            SecurityStamp = "d7fb6329-ac2a-415b-8ac5-bcd3dad33602",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "43452e5a-3e5a-4e03-af3e-5cf274aed285",
+                            Id = "fd7fbc69-3ff4-4cad-8d86-0a3ea7352009",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "92e8384a-cf94-48cf-a1c2-bfbc29aeb028",
+                            ConcurrencyStamp = "d2788b13-c4c2-4958-a399-6504712e8b9d",
                             Email = "tester@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "TESTER@GMAIL.COM",
                             NormalizedUserName = "TESTER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMftFek4FbS6w81rCBNcfiC9lU/kpLJVRC4nDQQjvX9Xjv8D8c50ilgHitFWAS+1QQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELo9Ov8ggXkh5vu8YlhZ2vwFCKEFlZXcFkTz2mxBN4jdavx8B7A0hirWOVGIYbYcbQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "74d2d194-ac6a-402d-baaf-0fdbbe6ec3a5",
+                            SecurityStamp = "73c04121-0c15-46ae-9fa1-d5bd45859ab4",
                             TwoFactorEnabled = false,
                             UserName = "tester"
                         });
@@ -251,8 +251,8 @@ namespace StyleShop.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "2ce922c3-c679-4004-8b4b-9e1dc9d81bb0",
-                            RoleId = "9edabd2f-e374-49fa-b434-bfdf10c52522"
+                            UserId = "4641d04c-fdc3-4350-85c6-e625396e329b",
+                            RoleId = "589c0adc-3e4a-440b-acf6-6c7b996295a9"
                         });
                 });
 
@@ -297,6 +297,9 @@ namespace StyleShop.Infrastructure.Migrations
                     b.Property<int>("ProductQuantity")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -316,28 +319,31 @@ namespace StyleShop.Infrastructure.Migrations
                         {
                             Id = 1,
                             OrderStatusId = 1,
-                            OrderedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6757),
+                            OrderedAt = new DateTime(2023, 12, 27, 17, 10, 20, 226, DateTimeKind.Utc).AddTicks(6215),
                             ProductId = 1,
                             ProductQuantity = 1,
-                            UserId = "43452e5a-3e5a-4e03-af3e-5cf274aed285"
+                            TotalPrice = 699.99m,
+                            UserId = "fd7fbc69-3ff4-4cad-8d86-0a3ea7352009"
                         },
                         new
                         {
                             Id = 2,
                             OrderStatusId = 2,
-                            OrderedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6759),
+                            OrderedAt = new DateTime(2023, 12, 27, 17, 10, 20, 226, DateTimeKind.Utc).AddTicks(6217),
                             ProductId = 2,
                             ProductQuantity = 2,
-                            UserId = "43452e5a-3e5a-4e03-af3e-5cf274aed285"
+                            TotalPrice = 49.98m,
+                            UserId = "fd7fbc69-3ff4-4cad-8d86-0a3ea7352009"
                         },
                         new
                         {
                             Id = 3,
-                            OrderStatusId = 4,
-                            OrderedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6760),
+                            OrderStatusId = 3,
+                            OrderedAt = new DateTime(2023, 12, 27, 17, 10, 20, 226, DateTimeKind.Utc).AddTicks(6219),
                             ProductId = 3,
                             ProductQuantity = 3,
-                            UserId = "43452e5a-3e5a-4e03-af3e-5cf274aed285"
+                            TotalPrice = 29.97m,
+                            UserId = "fd7fbc69-3ff4-4cad-8d86-0a3ea7352009"
                         });
                 });
 
@@ -364,21 +370,16 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Pending"
+                            Name = "Preparation"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Processing"
-                        },
-                        new
-                        {
-                            Id = 3,
                             Name = "Shipped"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Name = "Delivered"
                         });
                 });
@@ -420,30 +421,30 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6701),
+                            CreatedAt = new DateTime(2023, 12, 27, 17, 10, 20, 226, DateTimeKind.Utc).AddTicks(5864),
                             Description = "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series.",
                             Name = "Iphone 13",
-                            Price = 3100m,
+                            Price = 699.99m,
                             ProductCategoryId = 1,
                             Quantity = 100
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6705),
+                            CreatedAt = new DateTime(2023, 12, 27, 17, 10, 20, 226, DateTimeKind.Utc).AddTicks(5868),
                             Description = "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.",
                             Name = "Nike sports sweatshirt",
-                            Price = 119.99m,
+                            Price = 24.99m,
                             ProductCategoryId = 2,
                             Quantity = 100
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6707),
+                            CreatedAt = new DateTime(2023, 12, 27, 17, 10, 20, 226, DateTimeKind.Utc).AddTicks(5869),
                             Description = "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.",
                             Name = "Game of Thrones - A Clash of Kingdoms",
-                            Price = 49.99m,
+                            Price = 9.99m,
                             ProductCategoryId = 3,
                             Quantity = 100
                         });
@@ -589,7 +590,7 @@ namespace StyleShop.Infrastructure.Migrations
                                 new
                                 {
                                     OrderId = 1,
-                                    City = "Another City",
+                                    City = "Birmingham",
                                     Country = "UK",
                                     PostalCode = "54321",
                                     Street = "789 Pine Lane"

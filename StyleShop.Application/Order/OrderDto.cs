@@ -29,5 +29,7 @@ namespace StyleShop.Application.Order
         public IdentityUser User { get; set; }
 
         public bool IsVisible { get; set; }
+
+        public decimal TotalPrice { get; set; }
     }
 }
