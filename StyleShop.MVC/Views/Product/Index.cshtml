@@ -1,8 +1,11 @@
-﻿@model IEnumerable<StyleShop.Application.Product.ProductDto>
+﻿@using StyleShop.Application.Product;
+
+@model IEnumerable<ProductDto>
 
 @{
     ViewData["Title"] = "Products";
     var isAdmin = User.IsInRole("admin");
+    int index = 1;
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -17,38 +20,23 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductCategoryId)
-            </th>
-            <th>
-                Actions
-            </th>
+            <th>Id</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductCategoryId)</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) 
+    {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCategoryId)
-            </td>
+            <td>@index</td>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            <td>@Html.DisplayFor(modelItem => item.ProductCategoryId)</td>
             <td>
                 @if(isAdmin)
                 {
@@ -58,6 +46,7 @@
                 <a class="btn btn-dark" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
-}
+        index++;
+    }
     </tbody>
 </table>

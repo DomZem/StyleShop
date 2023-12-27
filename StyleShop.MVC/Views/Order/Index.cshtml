@@ -5,6 +5,7 @@
 @{
     ViewData["Title"] = "Orders";
     var isAdmin = User.IsInRole("admin");
+    int index = 1;
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -27,21 +28,12 @@ else
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductQuantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderStatusId)
-            </th>
+            <th>Id</th>
+            <th>@Html.DisplayNameFor(model => model.City)</th>
+            <th>@Html.DisplayNameFor(model => model.Country)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductQuantity)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductId)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderStatusId)</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -51,21 +43,12 @@ else
         @if(item.IsVisible)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductQuantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderStatusId)
-                </td>
+                <td>@index</td>
+                <td>@Html.DisplayFor(modelItem => item.City)</td>
+                <td>@Html.DisplayFor(modelItem => item.Country)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductQuantity)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderStatusId)</td>
                 <td>
                     @if(isAdmin)
                     {
@@ -75,6 +58,7 @@ else
                     <a class="btn btn-dark" asp-controller="Order" asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </td>
             </tr>
+            index++;
         }
     }
     </tbody>
