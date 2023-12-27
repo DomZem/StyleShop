@@ -21,6 +21,18 @@
 <div>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            User email
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt class="col-sm-2">
+            Ordered at
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderedAt)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Street)
         </dt>
@@ -34,7 +46,7 @@
             @Html.DisplayFor(model => model.City)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PostalCode)
+            Postal code
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PostalCode)
@@ -46,22 +58,22 @@
             @Html.DisplayFor(model => model.Country)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductQuantity)
+            Product name
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            Quantity
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ProductQuantity)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductId)
+            Order status
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrderStatusId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrderStatusId)
+            @Html.DisplayFor(model => model.OrderStatus.Name)
         </dd>
     </dl>
 </div>

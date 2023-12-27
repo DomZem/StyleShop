@@ -32,12 +32,12 @@ namespace StyleShop.Infrastructure.Repositories
 
         public async Task<IEnumerable<Order>> GetAll()
         {
-            return await _dbContext.Orders.ToArrayAsync();
+            return await _dbContext.Orders.Include(o => o.Product).Include(o => o.OrderStatus).Include(o => o.User).ToArrayAsync();
         }
 
         public async Task<Order> GetById(int id)
         {
-            return await _dbContext.Orders.FirstAsync(p => p.Id == id);
+            return await _dbContext.Orders.Include(o => o.Product).Include(o => o.OrderStatus).Include(o => o.User).FirstAsync(p => p.Id == id);
         }
 
         public async Task<IEnumerable<OrderStatus>> GetOrderStatuses()
