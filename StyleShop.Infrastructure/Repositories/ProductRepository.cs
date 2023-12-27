@@ -22,12 +22,12 @@ namespace StyleShop.Infrastructure.Repositories
 
         public async Task<IEnumerable<Product>> GetAll()
         {
-            return await _dbContext.Products.ToArrayAsync();
+            return await _dbContext.Products.Include(p => p.ProductCategory).ToListAsync();
         }
 
         public async Task<Product> GetById(int id)
         {
-            return await _dbContext.Products.FirstAsync(p => p.Id == id);
+            return await _dbContext.Products.Include(p => p.ProductCategory).FirstAsync(p => p.Id == id);
         }
 
         public async Task<IEnumerable<ProductCategory>> GetProductCategories()

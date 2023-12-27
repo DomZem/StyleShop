@@ -4,7 +4,7 @@ using StyleShop.Domain.Interfaces;
 
 namespace StyleShop.Application.Product.Queries.GetProductDetailsById
 {
-    public class GetProductDetailsByIdQueryHandler : IRequestHandler<GetProductDetailsByIdQuery, ProductDto>
+    public class GetProductDetailsByIdQueryHandler : IRequestHandler<GetProductDetailsByIdQuery, Domain.Entities.Product>
     {
         private readonly IProductRepository _productRepository;
 
@@ -16,13 +16,10 @@ namespace StyleShop.Application.Product.Queries.GetProductDetailsById
             _mapper = mapper;
         }
 
-        public async Task<ProductDto> Handle(GetProductDetailsByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Domain.Entities.Product> Handle(GetProductDetailsByIdQuery request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetById(request.Id);
-
-            var dto = _mapper.Map<ProductDto>(product);
-
-            return dto;
+            return product;
         }
     }
 }
