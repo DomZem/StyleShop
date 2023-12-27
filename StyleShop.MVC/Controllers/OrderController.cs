@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StyleShop.Application.Order.Commands.CreateOrder;
 using StyleShop.Application.Order.Commands.DeleteOrder;
+using StyleShop.Application.Order.Commands.EditOrder;
 using StyleShop.Application.Order.Queries.GetAllOrders;
+using StyleShop.Application.Order.Queries.GetAllOrderStatuses;
 using StyleShop.Application.Order.Queries.GetOrderDetailsById;
 using StyleShop.Application.Product.Queries.GetAllProducts;
 
@@ -52,6 +53,29 @@ namespace StyleShop.MVC.Controllers
         {
             var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
             return View(dto);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
+            EditOrderCommand model = _mapper.Map<EditOrderCommand>(dto);
+
+            var orderStatuses = await _mediator.Send(new GetAllOrderStatusesQuery());
+            ViewBag.OrderStatuses = orderStatuses.Select(os => new SelectListItem() { Value = os.Id.ToString(), Text = os.Name });
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditOrderCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int id)
