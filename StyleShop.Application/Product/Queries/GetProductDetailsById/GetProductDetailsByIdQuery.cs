@@ -2,7 +2,7 @@
 
 namespace StyleShop.Application.Product.Queries.GetProductDetailsById
 {
-    public class GetProductDetailsByIdQuery : IRequest<Domain.Entities.Product>
+    public class GetProductDetailsByIdQuery : IRequest<ProductDto>
     {
         public int Id { get; set; }
 

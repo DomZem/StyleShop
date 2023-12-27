@@ -2,7 +2,7 @@
 
 namespace StyleShop.Application.Product.Queries.GetAllProducts
 {
-    public class GetAllProductsQuery : IRequest<IEnumerable<Domain.Entities.Product>>
+    public class GetAllProductsQuery : IRequest<IEnumerable<ProductDto>>
     {
     }
 }

@@ -1,6 +1,6 @@
-﻿@using StyleShop.Domain.Entities;
+﻿@using StyleShop.Application.Product;
 
-@model Product;
+@model ProductDto;
 
 @{
     ViewData["Title"] = "Details";
@@ -14,7 +14,7 @@
     <div class="d-flex align-items-sm-center gap-2">
         @if(isAdmin)
         {
-            <a class="btn btn-primary" asp-action="Edit">Edit</a>
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
         }
         <a class="btn btn-dark" asp-action="Index">Back to List</a>
     </div>
