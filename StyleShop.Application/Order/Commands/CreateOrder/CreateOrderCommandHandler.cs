@@ -9,21 +9,29 @@ namespace StyleShop.Application.Order.Commands.CreateOrder
     {
         private readonly IOrderRepository _orderRepository;
 
+        private readonly IProductRepository _productRepository;
+
         private readonly IMapper _mapper;
 
         private readonly IUserContext _userContext;
 
-        public CreateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, IUserContext userContext)
+        public CreateOrderCommandHandler(IOrderRepository orderRepository, IProductRepository productRepository ,IMapper mapper, IUserContext userContext)
         {
             _orderRepository = orderRepository;
+            _productRepository = productRepository;
             _mapper = mapper;   
             _userContext = userContext;
         }
 
         public async Task<Unit> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = _mapper.Map<Domain.Entities.Order>(request);
+            var orderedProduct = await _productRepository.GetById(request.ProductId);
+            orderedProduct.Quantity -= 1;
 
+            await _productRepository.Commit();
+
+            var order = _mapper.Map<Domain.Entities.Order>(request);
+               
             order.OrderStatusId = 1;
             order.UserId = _userContext.GetCurrentUser().Id;
 

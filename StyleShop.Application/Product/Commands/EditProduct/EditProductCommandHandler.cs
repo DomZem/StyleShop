@@ -19,6 +19,7 @@ namespace StyleShop.Application.Product.Commands.EditProduct
             product.Name = request.Name;    
             product.Description = request.Description;
             product.Price = request.Price;
+            product.Quantity = request.Quantity;
             product.ProductCategoryId = request.ProductCategoryId;
 
             await _productRepository.Commit();
