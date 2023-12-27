@@ -25,17 +25,23 @@ namespace StyleShop.Application.Order.Commands.CreateOrder
 
         public async Task<Unit> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var orderedProduct = await _productRepository.GetById(request.ProductId);
-            orderedProduct.Quantity -= 1;
+            var currentUser = _userContext.GetCurrentUser();
 
-            await _productRepository.Commit();
+            if(currentUser == null) 
+            {
+                return Unit.Value;
+            }
 
-            var order = _mapper.Map<Domain.Entities.Order>(request);
-               
+            var order = _mapper.Map<Domain.Entities.Order>(request);   
             order.OrderStatusId = 1;
-            order.UserId = _userContext.GetCurrentUser().Id;
+            order.UserId = currentUser.Id;
 
             await _orderRepository.Create(order);
+
+            var orderedProduct = await _productRepository.GetById(request.ProductId);
+            orderedProduct.Quantity -= request.ProductQuantity;
+
+            await _productRepository.Commit();
 
             return Unit.Value;
         }

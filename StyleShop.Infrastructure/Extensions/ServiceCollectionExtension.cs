@@ -16,6 +16,7 @@ namespace StyleShop.Infrastructure.Extensions
                 configuration.GetConnectionString("StyleShop")));
 
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()   
                 .AddEntityFrameworkStores<StyleShopDbContext>();
 
             services.AddScoped<IProductRepository, ProductRepository>();

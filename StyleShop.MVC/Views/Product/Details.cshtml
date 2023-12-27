@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    var isAdmin = User.IsInRole("admin");
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -9,7 +10,10 @@
 
 
     <div class="d-flex align-items-sm-center gap-2">
-        <a class="btn btn-primary" asp-action="Edit">Edit</a>
+        @if(isAdmin)
+        {
+            <a class="btn btn-primary" asp-action="Edit">Edit</a>
+        }
         <a class="btn btn-dark" asp-action="Index">Back to List</a>
     </div>
 </div>

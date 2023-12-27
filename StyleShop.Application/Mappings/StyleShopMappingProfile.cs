@@ -25,7 +25,7 @@ namespace StyleShop.Application.Mappings
                 }));
 
             CreateMap<Domain.Entities.Order, OrderDto>()
-                .ForMember(dto => dto.IsVisible, opt => opt.MapFrom(src => user != null && src.UserId == user.Id))
+                .ForMember(dto => dto.IsVisible, opt => opt.MapFrom(src => user != null && (src.UserId == user.Id || user.IsInRole("admin"))))
                 .ForMember(dto => dto.Street, opt => opt.MapFrom(src => src.OrderAddress.Street))
                 .ForMember(dto => dto.City, opt => opt.MapFrom(src => src.OrderAddress.City))
                 .ForMember(dto => dto.PostalCode, opt => opt.MapFrom(src => src.OrderAddress.PostalCode))
