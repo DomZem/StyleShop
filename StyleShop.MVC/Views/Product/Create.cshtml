@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProductCategoryId" class="control-label mb-2">Category</label>
-                <select class="form-control" asp-for="ProductCategoryId"></select>
+                <select class="form-control" asp-for="ProductCategoryId" asp-items="@ViewBag.ProductCategories"></select>
                 <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -53,23 +53,5 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        <script>
-            let select = document.getElementById("ProductCategoryId");
-                                              
-            fetch('/api/productCategories')
-                .then(response => {
-                    if(response.ok) {
-                        return response.json();
-                    }
-                })
-                .then(json => {
-                    json.forEach(item => {
-                        let option = document.createElement('option');
-                        option.setAttribute('value', item.id);
-                        option.innerText = item.name;
-                        select.appendChild(option);
-                    })
-                })
-        </script>
     }
 }

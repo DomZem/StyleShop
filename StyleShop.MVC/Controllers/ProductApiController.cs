@@ -35,7 +35,7 @@ namespace StyleShop.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> ReadAll()
         {
-            var result = await _dbContext.Products.Include(p => p.ProductCategory).ToListAsync();
+            var result = await _dbContext.Products.ToListAsync();
 
             return Ok(result);
         }

@@ -2,9 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using StyleShop.Application.Product.Commands.CreateProduct;
 using StyleShop.Application.Product.Commands.DeleteProduct;
 using StyleShop.Application.Product.Commands.EditProduct;
+using StyleShop.Application.Product.Queries.GetAllProductCategories;
 using StyleShop.Application.Product.Queries.GetAllProducts;
 using StyleShop.Application.Product.Queries.GetProductDetailsById;
 
@@ -29,8 +31,11 @@ namespace StyleShop.MVC.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var categories = await _mediator.Send(new GetAllProductCategoriesQuery());
+            ViewBag.ProductCategories = categories.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
+
             return View();
         }
 
@@ -58,6 +63,9 @@ namespace StyleShop.MVC.Controllers
         {
             var dto = await _mediator.Send(new GetProductDetailsByIdQuery(id));
             EditProductCommand model = _mapper.Map<EditProductCommand>(dto);
+
+            var categories = await _mediator.Send(new GetAllProductCategoriesQuery());
+            ViewBag.ProductCategories = categories.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Name });
 
             return View(model);
         }
