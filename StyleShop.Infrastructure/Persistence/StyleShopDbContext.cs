@@ -44,6 +44,7 @@ namespace StyleShop.Infrastructure.Persistence
 
             #region === Seed ===
 
+            // Tester
             string TESTER_USER_ID = Guid.NewGuid().ToString();
 
             var testerUser = new IdentityUser
@@ -55,17 +56,55 @@ namespace StyleShop.Infrastructure.Persistence
                 NormalizedUserName = "TESTER"
             };
 
-            // hash password
-            PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
-            testerUser.PasswordHash = ph.HashPassword(testerUser, "zaq1@WSX");
+            PasswordHasher<IdentityUser> testerPh = new PasswordHasher<IdentityUser>();
+            testerUser.PasswordHash = testerPh.HashPassword(testerUser, "zaq1@WSX");
 
             testerUser.NormalizedUserName = testerUser.Email.ToUpper();
             testerUser.NormalizedEmail = testerUser.Email.ToUpper();
             testerUser.LockoutEnabled = true;
             testerUser.LockoutEnd = null;
 
-            // save user
+            // Admin
+            string ADMIN_ID = Guid.NewGuid().ToString();
+            string ROLE_ID = Guid.NewGuid().ToString();
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "admin",
+                NormalizedName = "ADMIN",
+                Id = ROLE_ID,
+                ConcurrencyStamp = ROLE_ID
+            });
+
+            var admin = new IdentityUser
+            {
+                Id = ADMIN_ID,
+                Email = "admin@gmail.com",
+                EmailConfirmed = true,
+                UserName = "admin",
+                NormalizedUserName = "ADMIN"
+            };
+
+            // Hash admin password
+            PasswordHasher<IdentityUser> adminPh = new PasswordHasher<IdentityUser>();
+            admin.PasswordHash = adminPh.HashPassword(admin, "zaq1@WSX");
+
+            admin.NormalizedUserName = admin.Email.ToUpper();
+            admin.NormalizedEmail = admin.Email.ToUpper();
+            admin.LockoutEnabled = true;
+            admin.LockoutEnd = null;
+
+            // Save users
+            modelBuilder.Entity<IdentityUser>().HasData(admin);
             modelBuilder.Entity<IdentityUser>().HasData(testerUser);
+
+            // Add role to admin
+            modelBuilder.Entity<IdentityUserRole<string>>()
+            .HasData(new IdentityUserRole<string>
+            {
+                RoleId = ROLE_ID,
+                UserId = ADMIN_ID
+            });
 
             modelBuilder.Entity<ProductCategory>()
                 .HasData

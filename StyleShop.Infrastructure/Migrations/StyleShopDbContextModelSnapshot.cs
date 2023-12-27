@@ -47,6 +47,15 @@ namespace StyleShop.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "9edabd2f-e374-49fa-b434-bfdf10c52522",
+                            ConcurrencyStamp = "9edabd2f-e374-49fa-b434-bfdf10c52522",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -141,17 +150,33 @@ namespace StyleShop.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7a795d0a-2a88-4d05-bcfa-8850982323fb",
+                            Id = "2ce922c3-c679-4004-8b4b-9e1dc9d81bb0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2b338d68-eb74-4dbb-8103-92fa28294fd8",
+                            ConcurrencyStamp = "60ed0967-a577-4cba-836b-88e2d14cfc28",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMuqkCHLBioYI9ZPIadE8jw7cc3D4e3amNmPHE5k0WsltgSmKRKcADvERrzx7ZGbog==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "028b4b0b-ea66-40c6-8bbf-0a170ec57a70",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "43452e5a-3e5a-4e03-af3e-5cf274aed285",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "92e8384a-cf94-48cf-a1c2-bfbc29aeb028",
                             Email = "tester@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "TESTER@GMAIL.COM",
                             NormalizedUserName = "TESTER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENU2nAwqu2eHovrijFrJtKRDNOABwvm427OqWrEglvBKFk7yDi1M2WwH+FJ3j2V2Eg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMftFek4FbS6w81rCBNcfiC9lU/kpLJVRC4nDQQjvX9Xjv8D8c50ilgHitFWAS+1QQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f48b4ce1-68b7-4835-a97b-652249aea81c",
+                            SecurityStamp = "74d2d194-ac6a-402d-baaf-0fdbbe6ec3a5",
                             TwoFactorEnabled = false,
                             UserName = "tester"
                         });
@@ -219,6 +244,13 @@ namespace StyleShop.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "2ce922c3-c679-4004-8b4b-9e1dc9d81bb0",
+                            RoleId = "9edabd2f-e374-49fa-b434-bfdf10c52522"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -281,28 +313,28 @@ namespace StyleShop.Infrastructure.Migrations
                         {
                             Id = 1,
                             OrderStatusId = 1,
-                            OrderedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1578),
+                            OrderedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6757),
                             ProductId = 1,
                             ProductQuantity = 1,
-                            UserId = "7a795d0a-2a88-4d05-bcfa-8850982323fb"
+                            UserId = "43452e5a-3e5a-4e03-af3e-5cf274aed285"
                         },
                         new
                         {
                             Id = 2,
                             OrderStatusId = 2,
-                            OrderedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1580),
+                            OrderedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6759),
                             ProductId = 2,
                             ProductQuantity = 2,
-                            UserId = "7a795d0a-2a88-4d05-bcfa-8850982323fb"
+                            UserId = "43452e5a-3e5a-4e03-af3e-5cf274aed285"
                         },
                         new
                         {
                             Id = 3,
                             OrderStatusId = 4,
-                            OrderedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1581),
+                            OrderedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6760),
                             ProductId = 3,
                             ProductQuantity = 3,
-                            UserId = "7a795d0a-2a88-4d05-bcfa-8850982323fb"
+                            UserId = "43452e5a-3e5a-4e03-af3e-5cf274aed285"
                         });
                 });
 
@@ -385,7 +417,7 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1523),
+                            CreatedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6701),
                             Description = "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series.",
                             Name = "Iphone 13",
                             Price = 3100m,
@@ -395,7 +427,7 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1527),
+                            CreatedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6705),
                             Description = "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.",
                             Name = "Nike sports sweatshirt",
                             Price = 119.99m,
@@ -405,7 +437,7 @@ namespace StyleShop.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1529),
+                            CreatedAt = new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6707),
                             Description = "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.",
                             Name = "Game of Thrones - A Clash of Kingdoms",
                             Price = 49.99m,

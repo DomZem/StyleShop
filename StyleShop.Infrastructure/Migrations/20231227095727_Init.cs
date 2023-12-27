@@ -248,9 +248,18 @@ namespace StyleShop.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "9edabd2f-e374-49fa-b434-bfdf10c52522", "9edabd2f-e374-49fa-b434-bfdf10c52522", "admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "7a795d0a-2a88-4d05-bcfa-8850982323fb", 0, "2b338d68-eb74-4dbb-8103-92fa28294fd8", "tester@gmail.com", true, true, null, "TESTER@GMAIL.COM", "TESTER@GMAIL.COM", "AQAAAAIAAYagAAAAENU2nAwqu2eHovrijFrJtKRDNOABwvm427OqWrEglvBKFk7yDi1M2WwH+FJ3j2V2Eg==", null, false, "f48b4ce1-68b7-4835-a97b-652249aea81c", false, "tester" });
+                values: new object[,]
+                {
+                    { "2ce922c3-c679-4004-8b4b-9e1dc9d81bb0", 0, "60ed0967-a577-4cba-836b-88e2d14cfc28", "admin@gmail.com", true, true, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEMuqkCHLBioYI9ZPIadE8jw7cc3D4e3amNmPHE5k0WsltgSmKRKcADvERrzx7ZGbog==", null, false, "028b4b0b-ea66-40c6-8bbf-0a170ec57a70", false, "admin" },
+                    { "43452e5a-3e5a-4e03-af3e-5cf274aed285", 0, "92e8384a-cf94-48cf-a1c2-bfbc29aeb028", "tester@gmail.com", true, true, null, "TESTER@GMAIL.COM", "TESTER@GMAIL.COM", "AQAAAAIAAYagAAAAEMftFek4FbS6w81rCBNcfiC9lU/kpLJVRC4nDQQjvX9Xjv8D8c50ilgHitFWAS+1QQ==", null, false, "74d2d194-ac6a-402d-baaf-0fdbbe6ec3a5", false, "tester" }
+                });
 
             migrationBuilder.InsertData(
                 table: "OrderStatuses",
@@ -274,13 +283,18 @@ namespace StyleShop.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "9edabd2f-e374-49fa-b434-bfdf10c52522", "2ce922c3-c679-4004-8b4b-9e1dc9d81bb0" });
+
+            migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CreatedAt", "Description", "Name", "Price", "ProductCategoryId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1523), "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series.", "Iphone 13", 3100m, 1, 100 },
-                    { 2, new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1527), "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.", "Nike sports sweatshirt", 119.99m, 2, 100 },
-                    { 3, new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1529), "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.", "Game of Thrones - A Clash of Kingdoms", 49.99m, 3, 100 }
+                    { 1, new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6701), "The iPhone 13, introduced in 2021, is part of Apple's flagship smartphone series.", "Iphone 13", 3100m, 1, 100 },
+                    { 2, new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6705), "Elevate your athletic wardrobe with the Nike Dri-FIT Performance Crewneck Sweatshirt, a perfect blend of style and functionality.", "Nike sports sweatshirt", 119.99m, 2, 100 },
+                    { 3, new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6707), "Dive into the epic realm of Westeros with 'A Clash of Kingdoms,' the latest installment in the gripping 'Game of Thrones' series by George R.R. Martin.", "Game of Thrones - A Clash of Kingdoms", 49.99m, 3, 100 }
                 });
 
             migrationBuilder.InsertData(
@@ -288,9 +302,9 @@ namespace StyleShop.Infrastructure.Migrations
                 columns: new[] { "Id", "OrderStatusId", "OrderedAt", "ProductId", "ProductQuantity", "UserId", "OrderAddress_City", "OrderAddress_Country", "OrderAddress_PostalCode", "OrderAddress_Street" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1578), 1, 1, "7a795d0a-2a88-4d05-bcfa-8850982323fb", "Another City", "UK", "54321", "789 Pine Lane" },
-                    { 2, 2, new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1580), 2, 2, "7a795d0a-2a88-4d05-bcfa-8850982323fb", "Anytown", "USA", "12345", "123 Main Street" },
-                    { 3, 4, new DateTime(2023, 12, 26, 22, 25, 1, 927, DateTimeKind.Utc).AddTicks(1581), 3, 3, "7a795d0a-2a88-4d05-bcfa-8850982323fb", "Sometown", "Canada", "67890", "456 Oak Avenue" }
+                    { 1, 1, new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6757), 1, 1, "43452e5a-3e5a-4e03-af3e-5cf274aed285", "Another City", "UK", "54321", "789 Pine Lane" },
+                    { 2, 2, new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6759), 2, 2, "43452e5a-3e5a-4e03-af3e-5cf274aed285", "Anytown", "USA", "12345", "123 Main Street" },
+                    { 3, 4, new DateTime(2023, 12, 27, 9, 57, 26, 889, DateTimeKind.Utc).AddTicks(6760), 3, 3, "43452e5a-3e5a-4e03-af3e-5cf274aed285", "Sometown", "Canada", "67890", "456 Oak Avenue" }
                 });
 
             migrationBuilder.CreateIndex(
