@@ -57,6 +57,12 @@ namespace StyleShop.MVC.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var dto = await _mediator.Send(new GetOrderDetailsByIdQuery(id));
+
+            if(dto == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(dto);
         }
 

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using StyleShop.Application.ApplicationUser;
 using StyleShop.Domain.Interfaces;
 
 namespace StyleShop.Application.Product.Commands.EditProduct
@@ -7,13 +8,23 @@ namespace StyleShop.Application.Product.Commands.EditProduct
     {
         private readonly IProductRepository _productRepository;
 
-        public EditProductCommandHandler(IProductRepository productRepository)
+        private readonly IUserContext _userContext;
+
+        public EditProductCommandHandler(IProductRepository productRepository, IUserContext userContext)
         {
             _productRepository = productRepository;
+            _userContext = userContext;
         }
 
         public async Task<Unit> Handle(EditProductCommand request, CancellationToken cancellationToken)
         {
+            var currentUser = _userContext.GetCurrentUser();
+
+            if (!currentUser.IsInRole("admin"))
+            {
+                return Unit.Value;
+            }
+
             var product = await _productRepository.GetById(request.Id);
 
             product.Name = request.Name;    

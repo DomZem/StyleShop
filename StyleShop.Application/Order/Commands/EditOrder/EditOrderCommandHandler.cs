@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using StyleShop.Application.ApplicationUser;
 using StyleShop.Domain.Interfaces;
 
 namespace StyleShop.Application.Order.Commands.EditOrder
@@ -7,14 +8,23 @@ namespace StyleShop.Application.Order.Commands.EditOrder
     {
         private readonly IOrderRepository _orderRepository;
 
-        public EditOrderCommandHandler(IOrderRepository orderRepository)
+        private readonly IUserContext _userContext;
+
+        public EditOrderCommandHandler(IOrderRepository orderRepository, IUserContext userContext)
         {
             _orderRepository = orderRepository;
+            _userContext = userContext;
         }
 
         public async Task<Unit> Handle(EditOrderCommand request, CancellationToken cancellationToken)
         {
-            // Check if user has role admin
+            var currentUser = _userContext.GetCurrentUser();
+
+            if (!currentUser.IsInRole("admin"))
+            {
+                return Unit.Value;
+            }
+
             var order = await _orderRepository.GetById(request.Id);
 
             order.OrderStatusId = request.OrderStatusId;
