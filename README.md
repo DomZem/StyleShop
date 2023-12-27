@@ -13,6 +13,23 @@
     ⚠️ If you are using <code>Package Manage Console</code> don't forget to set up Default project as <code>StyleShop.Infrastructure</code></li>
   <li>Before run application make sure in solution explorer you have <code>StyleShop.MVC</code> project set up as Startup Project</li>
 </ol>
+<h2>Credentials</h2>
+<ul>
+  <li>
+    User with <code>ADMIN</code> role:
+    <ul>
+      <li>Email: <code>admin@gmail.com</code></li>
+      <li>Password: <code>zaq1@WSX</code></li>
+    </ul>
+  </li>
+  <li>
+     User with no role:
+    <ul>
+      <li>Email: <code>tester@gmail.com</code></li>
+      <li>Password: <code>zaq1@WSX</code></li>
+    </ul>
+  </li>
+</ul>
 <h2>Features</h2>
 <ul>
   <li> 
