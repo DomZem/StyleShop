@@ -36,7 +36,7 @@ namespace StyleShop.MVC.Controllers
         public async Task<IActionResult> Create()
         {
             var products = await _mediator.Send(new GetAllProductsQuery());
-            ViewBag.Products = products.Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = $"{o.Name} - {o.Price}$, {o.Quantity} Left" });
+            ViewBag.Products = products.Where(o => o.Quantity > 0).Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = $"{o.Name} - {o.Price}$, {o.Quantity} Left" });
             return View();
         }
 
